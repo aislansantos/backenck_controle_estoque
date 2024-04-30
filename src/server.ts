@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import express, { Request, Response, urlencoded } from "express";
 import path from "path";
 
-import routes from "./routes/routes";
+import routes from "./routes/user.routes";
 
 dotenv.config();
 const server = express();
