@@ -1,8 +1,17 @@
 Sistema de controle de estoque:
 
 Admin
-/admin/cadUser
+    User
+    GET /admin/users
+    GET /admin/users/:id
+    POST /admin/users
+    PUT /admin/users/:id
+    DELETE /admin/users/:id
+
+
 /admin/logs
+    GET /admin/logs
+    GET /admin/logs/:id
 
 User
     cadastro

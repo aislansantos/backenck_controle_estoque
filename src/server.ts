@@ -1,23 +1,35 @@
-import cors from "cors";
-import dotenv from "dotenv";
-import express, { Request, Response, urlencoded } from "express";
-import path from "path";
-
+import "dotenv/config";
+import * as cors from "cors";
+import * as express from "express";
+import { Request, Response, urlencoded } from "express";
+// import * as AuthMiddleware from "@/middleware/Auth.Middleware";
+// import * as LogMiddleware from "@/middleware/Log.Middleware";
 import routes from "./routes/user.routes";
+import admRoutes from "@/routes/admin.routes";
+import { requestIntercepter } from "@/middleware/RequestIntercepter.Middleware";
+// import {} from "@/middleware/Auth.Middleware";
 
-dotenv.config();
-const server = express();
+const app = express();
 
-server.use(cors());
+app.use(cors());
+// Middleware para processar JSON e URL-encoded
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-server.use(express.static(path.join(__dirname, "../public")));
+app.use(urlencoded({ extended: true }));
 
-server.use(urlencoded({ extended: true }));
+// app.use("*", AuthMiddleware); // valida usuário
+// app.use("*", LogMiddleware); // registra movimentos
 
-server.use(routes);
+app.use("*", requestIntercepter);
 
-server.use((req: Request, res: Response) => {
+app.use("/admin", admRoutes);
+app.use("/", routes);
+
+app.use((req: Request, res: Response) => {
     res.status(404).json({ error: "Endpoint não encontrado." });
 });
 
-server.listen(process.env.PORT);
+app.listen(process.env.PORT, () => {
+    console.log(`🚀 Running in port: ${process.env.PORT}`);
+});
