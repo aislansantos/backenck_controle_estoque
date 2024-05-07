@@ -8,10 +8,10 @@ export const ping: RequestHandler = (req: Request, res: Response) => {
 };
 
 export const getAll: RequestHandler = async (req: Request, res: Response) => {
-    const items = await UserService.getAll();
+    const usersItems = await UserService.getAll();
 
-    if (items && Array.isArray(items)) {
-        const users = items.map((user) => {
+    if (usersItems && Array.isArray(usersItems)) {
+        const users = usersItems.map((user) => {
             return {
                 id: user.id,
                 name: user.name,
@@ -33,14 +33,14 @@ export const getUser: RequestHandler = async (req: Request, res: Response) => {
 };
 
 export const addUser: RequestHandler = async (req: Request, res: Response) => {
-    const adduserSchema = z.object({
+    const addUserSchema = z.object({
         name: z.string(),
         email: z.string().email(),
         password: z.string(),
         admin: z.boolean(),
     });
 
-    const body = adduserSchema.safeParse(req.body);
+    const body = addUserSchema.safeParse(req.body);
 
     if (!body.success) return res.json({ error: "Dados inválidos." });
 
@@ -73,6 +73,17 @@ export const updateUser: RequestHandler = async (
     const updatedUser = await UserService.updateUser(parseInt(id), body.data);
 
     if (updatedUser) return res.json({ user: updatedUser });
+
+    return res.json({ error: "Ocorreu um erro." });
+};
+
+export const removeUser: RequestHandler = async (
+    req: Request,
+    res: Response,
+) => {
+    const { id } = req.params;
+    const removedUser = await UserService.removeUser(parseInt(id));
+    if (removedUser) return res.json({ removedUser });
 
     return res.json({ error: "Ocorreu um erro." });
 };

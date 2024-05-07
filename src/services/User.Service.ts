@@ -48,3 +48,11 @@ export const getUserByEmail = async (email: string) => {
         return false;
     }
 };
+
+export const removeUser = async (id: number) => {
+    try {
+        return await prisma.user.delete({ where: { id } });
+    } catch (error) {
+        return false;
+    }
+};

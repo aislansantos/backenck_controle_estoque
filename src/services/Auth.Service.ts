@@ -5,6 +5,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+// Login and token generate
 export const login = async (email: string, password: string) => {
     try {
         const user = await prisma.user.findFirst({ where: { email } });
@@ -25,6 +26,6 @@ export const createToken = (user: DataUser) => {
     return JWT.sign(
         { email: user.email, password: user.password, admin: user.admin },
         process.env.DEFAULT_TOKEN as string,
-        { expiresIn: "1m" },
+        { expiresIn: "1d" },
     );
 };

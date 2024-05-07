@@ -2,16 +2,20 @@ Sistema de controle de estoque:
 
 Admin
     User
-    GET /admin/users
-    GET /admin/users/:id
-    POST /admin/users
-    PUT /admin/users/:id
-    DELETE /admin/users/:id
+    GET /admin/users OK
+    GET /admin/users/:id OK
+    POST /admin/users OK
+    PUT /admin/users/:id OK
+    DELETE /admin/users/:id OK
 
 
 /admin/logs - Adjust database
     GET /admin/logs
     GET /admin/logs/:id
+
+
+login
+POST /login OK
 
 User
     cadastro
