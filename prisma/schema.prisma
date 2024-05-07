@@ -41,12 +41,15 @@ model Product {
 model ProductCategory {
     id          Int    @id @default(autoincrement())
     description String @unique(map: "uc_product_category_description") @db.VarChar(255)
+    cat         String @db.VarChar(4)
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model ProductUnit {
-    id          Int    @id @default(autoincrement())
-    description String @unique(map: "uc_product_unit_description") @db.VarChar(3)
+    id               Int    @id @default(autoincrement())
+    description      String @unique(map: "uc_product_unit_description")
+    convertionFactor Int?    @default(1)
+    un               String @db.VarChar(4)
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments

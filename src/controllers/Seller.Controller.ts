@@ -33,7 +33,6 @@ export const addSeller: RequestHandler = async (
     });
 
     const body = addSellerSchema.safeParse(req.body);
-
     if (!body.success) return res.json({ error: "Dados inválidos" });
 
     const newSeller = await SellerService.addSeller(body.data);
