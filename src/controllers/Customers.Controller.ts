@@ -74,7 +74,18 @@ export const updateCustomer: RequestHandler = async (
         body.data,
     );
 
-    if (updatedCustomer) return res.json({ customer: updateCustomer });
+    if (updatedCustomer) return res.json({ customer: updatedCustomer });
+
+    return res.json({ error: "Ocorreu um erro." });
+};
+
+export const removeCustomer: RequestHandler = async (
+    req: Request,
+    res: Response,
+) => {
+    const { id } = req.params;
+    const removedCustomer = await CustomerService.removeCustomer(parseInt(id));
+    if (removedCustomer) return res.json({ removedCustomer });
 
     return res.json({ error: "Ocorreu um erro." });
 };

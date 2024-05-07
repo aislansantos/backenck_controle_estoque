@@ -40,3 +40,11 @@ export const updateCustomer = async (id: number, data: CustomerUpdateData) => {
         return false;
     }
 };
+
+export const removeCustomer = async (id: number) => {
+    try {
+        return await prisma.customer.delete({ where: { id } });
+    } catch (error) {
+        return false;
+    }
+};
