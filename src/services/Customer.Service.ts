@@ -1,4 +1,5 @@
 import { PrismaClient, Prisma } from "@prisma/client";
+import * as SellerService from "@/services/Seller.Service";
 
 const prisma = new PrismaClient();
 
@@ -12,7 +13,16 @@ export const getAll = async () => {
 
 export const getCustomer = async (id: number) => {
     try {
-        return await prisma.customer.findFirst({ where: { id } });
+        const customerData = await prisma.customer.findFirst({ where: { id } });
+        if (!customerData) return false;
+        const sellerData = await SellerService.getSeller(
+            customerData.id_seller,
+        );
+        if (!sellerData) return false;
+        const nameSeller = sellerData.name;
+
+        const customer = { ...customerData, nameSeller };
+        return customer;
     } catch (error) {
         return false;
     }

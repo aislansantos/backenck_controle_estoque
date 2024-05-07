@@ -1,5 +1,6 @@
 import { Router } from "express";
 import * as CustomerController from "@/controllers/Customers.Controller";
+import * as SellerController from "@/controllers/Seller.Controller";
 
 const router = Router();
 
@@ -10,4 +11,11 @@ router.post("/customers", CustomerController.addCustomer);
 router.put("/customers/:id", CustomerController.updateCustomer);
 router.delete("/customers/:id", CustomerController.removeCustomer);
 
+// Rotas de vendedores
+
 export default router;
+router.get("/sellers", SellerController.getAll);
+router.get("/sellers/:id", SellerController.getSeller);
+router.post("/sellers", SellerController.addSeller);
+router.put("/sellers/:id", SellerController.updateSeller);
+router.delete("/sellers/:id", SellerController.removeSeller);
