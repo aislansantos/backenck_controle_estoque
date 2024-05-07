@@ -23,6 +23,7 @@ model product {
     amount           Int
     fk_id_unit       Int
     fk_id_category   Int
+    active           Boolean          @default(true)
     product_category product_category @relation(fields: [fk_id_category], references: [id], onDelete: NoAction, onUpdate: NoAction)
     product_unit     product_unit     @relation(fields: [fk_id_unit], references: [id], onDelete: NoAction, onUpdate: NoAction)
     purchase_item    purchase_item[]
@@ -141,5 +142,4 @@ model user {
     email    String  @unique
     password String
     admin    Boolean
-    token    String
 }

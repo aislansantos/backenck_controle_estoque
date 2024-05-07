@@ -9,7 +9,7 @@ Admin
     DELETE /admin/users/:id
 
 
-/admin/logs
+/admin/logs - Adjust database
     GET /admin/logs
     GET /admin/logs/:id
 

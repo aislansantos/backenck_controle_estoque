@@ -26,3 +26,25 @@ export const addUser = async (data: UserCreateData) => {
         return false;
     }
 };
+
+type UserUpdateData = Prisma.Args<typeof prisma.user, "update">["data"];
+export const updateUser = async (id: number, data: UserUpdateData) => {
+    try {
+        const teste = await prisma.user.update({
+            where: { id },
+            data,
+        });
+
+        return teste;
+    } catch (error) {
+        return false;
+    }
+};
+
+export const getUserByEmail = async (email: string) => {
+    try {
+        return await prisma.user.findFirst({ where: { email } });
+    } catch (error) {
+        return false;
+    }
+};

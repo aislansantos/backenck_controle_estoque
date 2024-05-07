@@ -1,6 +1,6 @@
 import { Request, Response, RequestHandler } from "express";
 import * as AuthService from "@/services/Auth.Service";
-import * as UserService from "@/services/User.Service";
+import { createToken } from "@/services/Auth.Service";
 import { z } from "zod";
 
 export const login: RequestHandler = async (req: Request, res: Response) => {
@@ -10,15 +10,14 @@ export const login: RequestHandler = async (req: Request, res: Response) => {
     });
 
     const body = loginSchema.safeParse(req.body);
+
     if (!body.success) return res.json({ error: "Dados inválidos" });
 
-    const user = await AuthService.login(body.data);
+    const user = await AuthService.login(body.data.email, body.data.password);
 
-    if (!user) {
-        return res.json({ error: "Email/senha errados. " });
-    }
+    if (!user) return res.json({ error: "Email/senha inválidos." });
 
-    const token = AuthService.createToken(user);
+    const token = createToken(user);
 
     return res.json({ token });
 };
