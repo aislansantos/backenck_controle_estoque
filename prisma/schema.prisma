@@ -29,27 +29,32 @@ model Customer {
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model Product {
-    id             Int     @id @default(autoincrement())
-    description    String? @db.VarChar(255)
-    amount         Int
-    fk_id_unit     Int
-    fk_id_category Int
-    active         Boolean @default(true)
+    id          Int     @id @default(autoincrement())
+    description String  @db.VarChar(255)
+    amount      Int     @default(0)
+    id_unit     Int
+    id_category Int
+    active      Boolean @default(true)
+
+    unit     ProductUnit     @relation(fields: [id_unit], references: [id])
+    category ProductCategory @relation(fields: [id_category], references: [id])
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model ProductCategory {
-    id          Int    @id @default(autoincrement())
-    description String @unique(map: "uc_product_category_description") @db.VarChar(255)
-    cat         String @db.VarChar(4)
+    id          Int       @id @default(autoincrement())
+    description String    @unique(map: "uc_product_category_description") @db.VarChar(255)
+    cat         String    @db.VarChar(4)
+    Product     Product[]
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model ProductUnit {
-    id               Int    @id @default(autoincrement())
-    description      String @unique(map: "uc_product_unit_description")
-    convertionFactor Int?    @default(1)
-    un               String @db.VarChar(4)
+    id               Int       @id @default(autoincrement())
+    description      String    @unique(map: "uc_product_unit_description")
+    convertionFactor Int?      @default(1)
+    un               String    @db.VarChar(4)
+    Product          Product[]
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
