@@ -24,7 +24,7 @@ router.delete("/sellers/:id", SellerController.removeSeller);
 router.get("/products/units", UnitProductsController.getAll);
 router.get("/products/units/:id", UnitProductsController.getUnitProducts);
 router.post("/products/units", UnitProductsController.addUnitProducts);
-// router.put("/products/units/:id", productsController.updateProducts);
+router.put("/products/units/:id", UnitProductsController.updateUnitPoduct);
 // router.delete("/products/units/:id", productsController.removeProducts);
 
 export default router;
