@@ -1,5 +1,5 @@
 import { RequestHandler, Request, Response } from "express";
-import * as UnitProductService from "@/services/UnitProducts.Service";
+import * as UnitProductService from "@/services/ProductsUnit.Service";
 import { z } from "zod";
 
 export const getAll: RequestHandler = async (req: Request, res: Response) => {
@@ -69,7 +69,7 @@ export const removeUnitProduct: RequestHandler = async (
     res: Response,
 ) => {
     const { id } = req.params;
-    const removedUnitProduct = await UnitProductService.removeUnitProdct(
+    const removedUnitProduct = await UnitProductService.removeUnitProduct(
         parseInt(id),
     );
     if (removedUnitProduct) return res.json({ removedUnitProduct });

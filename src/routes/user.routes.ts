@@ -1,7 +1,7 @@
 import { Router } from "express";
 import * as CustomerController from "@/controllers/Customers.Controller";
 import * as SellerController from "@/controllers/Seller.Controller";
-import * as UnitProductsController from "@/controllers/UnitProducts.Controller";
+import * as UnitProductsController from "@/controllers/ProductsUnit.Controller";
 
 const router = Router();
 
@@ -25,6 +25,6 @@ router.get("/products/units", UnitProductsController.getAll);
 router.get("/products/units/:id", UnitProductsController.getUnitProducts);
 router.post("/products/units", UnitProductsController.addUnitProducts);
 router.put("/products/units/:id", UnitProductsController.updateUnitPoduct);
-// router.delete("/products/units/:id", productsController.removeProducts);
+router.delete("/products/units/:id", UnitProductsController.removeUnitProduct);
 
 export default router;
