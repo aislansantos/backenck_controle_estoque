@@ -1,6 +1,7 @@
 import { Router } from "express";
 import * as CustomerController from "@/controllers/Customers.Controller";
 import * as SellerController from "@/controllers/Seller.Controller";
+import * as SupplierController from "@/controllers/Supplier.Controller";
 import * as UnitProductsController from "@/controllers/ProductsUnit.Controller";
 import * as CatProductsController from "@/controllers/ProductsCategory.Controller";
 import * as ProductController from "@/controllers/Products.Controller";
@@ -45,5 +46,12 @@ router.get("/products/:id", ProductController.getProduct);
 router.post("/products", ProductController.addProducts);
 router.put("/products/:id", ProductController.updateProduct);
 router.delete("/products/:id", ProductController.removeProduct);
+
+// Rotas de Fornecedores
+router.get("/suppliers", SupplierController.getAll);
+router.get("/suppliers/:id", SupplierController.getSupplier);
+router.post("/suppliers", SupplierController.addSupplier);
+router.put("/suppliers/:id", SupplierController.updateSupplier);
+router.delete("/suppliers/:id", SupplierController.removeSupplier);
 
 export default router;

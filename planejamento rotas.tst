@@ -19,14 +19,14 @@ POST /login OK
 
 User
     cadastro
-        Customers
+        Customers - OK
             GET /custumers/
             GET /custumers/:id
             POST /customers
             PUT /customer/:id
             DELETE /customers/:id
 
-        sallers
+        sallers - OK
             GET /sallers/
             GET /sallers/:id
             POST /sallers
@@ -40,14 +40,14 @@ User
             PUT /suppliers/:id
             DELETE /suppliers/:id
 
-        products_categories
+        products_categories - OK
             GET /products_categories/
             GET /products_categories/:id
             POST /products_categories
             PUT /products_categories/:id
             DELETE /products_categories/:id       
 
-        products_unities
+        products_unities - OK
             products_categories
             GET /products_categories/
             GET /products_categories/:id
@@ -55,7 +55,7 @@ User
             PUT /products_categories/:id
             DELETE /products_categories/:id       
         
-        products
+        products - OK
             GET /products/
             GET /products/:id
             POST /products
