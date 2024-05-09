@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Product" ALTER COLUMN "amount" DROP NOT NULL,
+ALTER COLUMN "amount" SET DEFAULT 0,
+ALTER COLUMN "active" DROP NOT NULL,
+ALTER COLUMN "active" SET DEFAULT true;

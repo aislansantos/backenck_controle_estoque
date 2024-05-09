@@ -3,6 +3,7 @@ import * as CustomerController from "@/controllers/Customers.Controller";
 import * as SellerController from "@/controllers/Seller.Controller";
 import * as UnitProductsController from "@/controllers/ProductsUnit.Controller";
 import * as CatProductsController from "@/controllers/ProductsCategory.Controller";
+import * as ProductController from "@/controllers/Products.Controller";
 
 const router = Router();
 
@@ -37,5 +38,12 @@ router.delete(
     "/products/categories/:id",
     CatProductsController.removeCatProducts,
 );
+
+// Rotas de Produtos
+router.get("/products", ProductController.getAll);
+router.get("/products/:id", ProductController.getProduct);
+router.post("/products", ProductController.addProducts);
+router.put("/products/:id", ProductController.updateProduct);
+router.delete("/products/:id", ProductController.removeProduct);
 
 export default router;

@@ -31,10 +31,10 @@ model Customer {
 model Product {
     id          Int     @id @default(autoincrement())
     description String  @db.VarChar(255)
-    amount      Int     @default(0)
+    amount      Int?     @default(0)
     id_unit     Int
     id_category Int
-    active      Boolean @default(true)
+    active      Boolean? @default(true)
 
     unit     ProductUnit     @relation(fields: [id_unit], references: [id])
     category ProductCategory @relation(fields: [id_category], references: [id])
