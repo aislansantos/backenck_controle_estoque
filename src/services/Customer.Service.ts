@@ -1,60 +1,83 @@
-import { PrismaClient, Prisma } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import * as SellerService from "@/services/Seller.Service";
 
-const prisma = new PrismaClient();
+interface ICustomersCad {
+    name: string;
+    email: string;
+    city: string;
+    active: boolean;
+    id_seller: number;
+}
 
-export const getAll = async () => {
-    try {
-        return await prisma.customer.findMany();
-    } catch (error) {
-        return false;
+interface ICustomersUpdate {
+    name?: string;
+    email?: string;
+    city?: string;
+    active?: boolean;
+    id_seller?: number;
+}
+
+export default class CustomerService {
+    private prismaClient;
+    constructor() {
+        this.prismaClient = new PrismaClient();
     }
-};
 
-export const getCustomer = async (id: number) => {
-    try {
-        const customerData = await prisma.customer.findFirst({ where: { id } });
-        if (!customerData) return false;
-        const sellerData = await SellerService.getSeller(
-            customerData.id_seller,
-        );
-        if (!sellerData) return false;
-        const nameSeller = sellerData.name;
-
-        const customer = { ...customerData, nameSeller };
-        return customer;
-    } catch (error) {
-        return false;
+    public async getAll() {
+        try {
+            return await this.prismaClient.customer.findMany();
+        } catch (error) {
+            return false;
+        }
     }
-};
 
-type CustomerCreateData = Prisma.Args<typeof prisma.customer, "create">["data"];
-export const addCustomer = async (data: CustomerCreateData) => {
-    try {
-        return await prisma.customer.create({ data });
-    } catch (error) {
-        return false;
+    public async getCustomer(id: number) {
+        try {
+            const customerData = await this.prismaClient.customer.findFirst({
+                where: { id },
+            });
+            if (!customerData) return false;
+            const sellerData = await SellerService.getSeller(
+                customerData.id_seller,
+            );
+            if (!sellerData) return false;
+            const nameSeller = sellerData.name;
+
+            const customer = { ...customerData, nameSeller };
+            return customer;
+        } catch (error) {
+            return false;
+        }
     }
-};
 
-type CustomerUpdateData = Prisma.Args<typeof prisma.customer, "update">["data"];
-export const updateCustomer = async (id: number, data: CustomerUpdateData) => {
-    try {
-        const updatedCustomer = await prisma.customer.update({
-            where: { id },
-            data,
-        });
-
-        return updatedCustomer;
-    } catch (error) {
-        return false;
+    public async addCustomer(data: ICustomersCad) {
+        try {
+            return await this.prismaClient.customer.create({ data });
+        } catch (error) {
+            return false;
+        }
     }
-};
 
-export const removeCustomer = async (id: number) => {
-    try {
-        return await prisma.customer.delete({ where: { id } });
-    } catch (error) {
-        return false;
+    public async updateCustomer(id: number, data: ICustomersUpdate) {
+        try {
+            const updatedCustomer = await this.prismaClient.customer.update({
+                where: { id },
+                data,
+            });
+
+            return updatedCustomer;
+        } catch (error) {
+            return false;
+        }
     }
-};
+
+    public async removeCustomer(id: number) {
+        try {
+            return await this.prismaClient.customer.delete({
+                where: { id },
+            });
+        } catch (error) {
+            return false;
+        }
+    }
+}

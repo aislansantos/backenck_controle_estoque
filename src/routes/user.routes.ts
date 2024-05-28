@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as CustomerController from "@/controllers/Customers.Controller";
+import CustomerController from "@/controllers/Customers.Controller";
 import * as SellerController from "@/controllers/Seller.Controller";
 import * as SupplierController from "@/controllers/Supplier.Controller";
 import * as UnitProductsController from "@/controllers/ProductsUnit.Controller";
